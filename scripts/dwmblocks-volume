@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# currentVolume=$(amixer get Master | grep -oP '[\.\d]+(?=%)' | head -1)
+currentVolume=$(pamixer --get-volume)
+icon=""
+
+if (($currentVolume > 80 && $currentVolume < 100)); then
+  icon="墳"
+elif (($currentVolume > 50 && $currentVolume < 80)); then
+  icon="墳"
+elif (($currentVolume > 20 && $currentVolume < 50)); then
+  icon="奔"
+elif (($currentVolume > 0 && $currentVolume < 20)); then
+  icon="奄"
+elif (($currentVolume == 0)); then
+  icon="ﱝ"
+fi
+
+echo "$icon $currentVolume"

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+currentTemps=$(sensors)
+
+gpuTemp=$(echo "$currentTemps" | awk '/edge/ {print $2}' | sed "s/[^0-9.]*//g")
+gpuFanSpeed=$(echo "$currentTemps" | awk '/fan/ {print $2}' | awk 'END {print}' | sed "s/[^0-9.]*//g" | head -1)
+
+echo "${gpuFanSpeed}RPM $gpuTemp 糖"
